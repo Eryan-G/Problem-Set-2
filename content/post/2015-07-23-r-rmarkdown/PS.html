@@ -1,0 +1,127 @@
+---
+title: "Impact of Income on Self Rated Mental Health"
+author: "Eryan Gu, Jiaqi Liu, Ruichen Lu, Xinyun Zhang"
+date: '2020-10-19'
+categories: R
+tags:
+- R Markdown
+- plot
+- regression
+---
+
+
+
+<div id="abstract" class="section level2">
+<h2>Abstract</h2>
+<p>In this analysis, we collect the data from the 2017 General Social Survey (GSS) on the Family and create a table, draw a bar plot and a scatter plot to check the relationship between the number of people in different income ranges and their mental health condition. Finally, we find out that we are able to build a linear regression model to show that lower-income individuals are typically under greater pressure than those who make more money. This is a serious social phenomenon that needs to be addressed because the life stress can have bad impacts on their lives and pressure can leave a long-lasting, harmful imprint on their genes, resulting in a decline in the quality of DNA among the poor.</p>
+</div>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>Nowadays, the global economy is experiencing a huge recession due to the pandemic. Meanwhile, there is growing concern about the impact of the global economic downturn on mental health. Some studies have shown that lower income is related to mental disorders, while this association has not been found in other studies. To study the relationship between income and mental health, we will build an analysis of the number of people in different income ranges and their mental health condition from the 2017 General Social Survey (GSS) on the Family, which is conducted by stratified sampling. By making a table, drawing the bar plot and the scatter plot, we can find out if there is any linear relationship between income and mental health. After that, we are able to build a linear regression model for these two variables to further examine the association between income and mental health. Moreover, the discussion part will illustrates that the result of the analysis, which is people with lower income are usually under greater pressure than those earn more money. Then, weakness and what we will do for next will be demonstrated in the end.</p>
+</div>
+<div id="data" class="section level2">
+<h2>Data</h2>
+<p>The data selected are number of people in different income ranges, and their mental health condition. In particular, we select people who rate their mental health “Excellent” in different income groups. Since these two groups of data are well-organized, and it’s very direct to see the relationship between income and mental health condition. However, one potential drawback is that we only collect data of people who rate themselves “Excellent” and ignore other conditions. It might cause confusion that whether there is more people of high income ranges rate their mental health conditions “Excellent” or “Poor”. Another drawback is that there might be other factors that influence one’s mental health condition other than income like educational level or living environment. These groups of variables are similar to what we chose. So, we can’t identify what exactly influence one’s mental health at this point.</p>
+<p>The data is collected from 2017 General Social Survey (GSS). The questionnaire provides information about social trends of a typical Canadian family. Throughout analyzing and interpreting the responses from the survey, we can monitor the social behaviours of Canadians over time and solve social and political issues. The bad about the survey is that people might reveal their private information like income, household size.</p>
+<p>The target population is all persons who are 15 years old or older in Canada except for the residents of Yukon, Northwest Territories, and Nunavut and full-time residents of institutions. Frames are lists of telephone numbers in use provided by various sources and also the address registered. Sampled population are people within each telephone and address in each stratum.</p>
+<p>The method used is stratified sampling. Firstly, each of ten provinces were divided into strata. Then, simple random sampling without replacement is applied to each strata to form a test group. The advantage of stratified sampling is that it provides a more accurate dataset that can represent the whole population since the entire population is stratified first. However, the bad side about stratified sampling is that it can’t apply to all kinds of study. When survey planner can’t classify the stratum properly, the method cannot be used. The response rate for the 2017 GSS was 52.4%. The researchers wanted to improve the non-response rate by adjusting the proportion of “cell phone only” households into the frame. The cost for the survey is not much since it only delivered by telephone numbers and address. It save the cost of travel expense.</p>
+</div>
+<div id="model" class="section level2">
+<h2>Model</h2>
+<p><img src="/post/2015-07-23-r-rmarkdown/PS_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+The selected model is linear regression model, and it’s run by R. Linear regression is to model a linear relationship between a responding variable y and the explanatory variable x. In this case, we are predicting there is a linear relationship between income and mental health.</p>
+<p>The formula is:
+<span class="math display">\[Y_i = \beta_0 + \beta_1X_(people,i) + \epsilon_i\]</span></p>
+<p><span class="math inline">\(Y_i\)</span> is the dependent variable in the true model while <span class="math inline">\(X(people,i)\)</span> is the explanatory variable in the true model. <span class="math inline">\(\beta_0\)</span> is the intercept term and <span class="math inline">\(\beta_1\)</span> is the slope of the true model. <span class="math inline">\(\epsilon_i\)</span> is the error term, and it’s assumed to be identically, independently distributed.</p>
+</div>
+<div id="results" class="section level2">
+<h2>Results</h2>
+<p><strong>Data</strong></p>
+<pre><code>##            income_range income excellent proportion
+## 1     Less than $25,000   6772      1752  0.2587123
+## 2    $25,000 to $49,999   6173      1798  0.2912684
+## 3    $50,000 to $74,999   3896      1193  0.2436683
+## 4 $100,000 to $ 124,999   2030       653  0.3216749
+## 5 $100,000 to $ 124,999    846       295  0.3486998
+## 6     $125,000 and more    855       389  0.4395480</code></pre>
+<ul>
+<li>income_range: different income groups corroding to each respondent’s total income before tax.</li>
+<li>income: number of people in different income group.</li>
+<li>excellent: number of people who self rated their mental health condition as “Excellent” within each income group.</li>
+<li>proportion(excellent/income): proportion of people who rated themselves as “Excellent” with respect to each income group.</li>
+</ul>
+<p><img src="/post/2015-07-23-r-rmarkdown/PS_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<ul>
+<li>number of people decreases in each income group as income increases. Except for the last group with income 125,000 and more are silghtly higher than income range from 100,000 to 124,999.</li>
+</ul>
+<p><img src="/post/2015-07-23-r-rmarkdown/PS_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<ul>
+<li>According to the trend of the scatter plot, there might be a weak negative correlation between number of people in different income ranges and proportion of people who rated their metal health condition as “Excellent” in these different income groups. The points distrubuted from left to right is based on number of people in higher income range to lower income range. Since there are only 6 data points graphed, it is hard to discern a clear trend.</li>
+</ul>
+<p><strong>R Output</strong></p>
+<pre><code>## 
+## Call:
+## lm(formula = proportion ~ income, data = income_metal_health_data)
+## 
+## Residuals:
+##        1        2        3        4        5        6 
+##  0.01027  0.03050 -0.06397 -0.02438 -0.02173  0.06931 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  3.878e-01  3.747e-02  10.351 0.000492 ***
+## income      -2.059e-05  8.969e-06  -2.295 0.083386 .  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.05244 on 4 degrees of freedom
+## Multiple R-squared:  0.5684, Adjusted R-squared:  0.4605 
+## F-statistic: 5.268 on 1 and 4 DF,  p-value: 0.08339</code></pre>
+<ul>
+<li><p>The fitted equation line:
+<span class="math display">\[\hat{Y}_i = 0.3954 - 1.972e(-05) X_i\]</span></p></li>
+<li><p><span class="math inline">\(\hat{Y}_i\)</span> is proportion of people who rated their metal health condition as “Excellent” in different income groups where <span class="math inline">\(X_i\)</span> is number of people in different income ranges.</p></li>
+<li><p><span class="math inline">\(\hat{\beta}_0\)</span> is 3.954e-01 and <span class="math inline">\(\hat{\beta}_1\)</span> is -1.972e-05.</p></li>
+</ul>
+<pre><code>##  (Intercept)       income 
+## 0.0004917002 0.0833864115</code></pre>
+<ul>
+<li><p>When doing the hypothesis test of <span class="math inline">\({\beta}_0\)</span>, the p-value is 0.000155, which is less than the confidence interval(0.05). So that we reject reject <span class="math inline">\(H_0\)</span>, intercept (<span class="math inline">\({\beta}_0\)</span>) is statistically significant. <span class="math inline">\({\beta}_0\)</span> is statistically different from 0.</p></li>
+<li><p>When doing the hypothesis test of <span class="math inline">\({\beta}_1\)</span>, the p-value is 0.044216, which is slightly less than the confidence interval(0.05). So that we reject <span class="math inline">\(H_0\)</span>, in other words <span class="math inline">\({\beta}_1\)</span> is statistically significant. <span class="math inline">\({\beta}_1\)</span> is is statistically different from 0.</p></li>
+</ul>
+</div>
+<div id="discussion" class="section level2">
+<h2>Discussion</h2>
+<p>Statistics of the model is selected from the 2017 Canadian General Social Survey (GSS). People with different income ranges are divided into six groups including “Less than 25,000”, “25,000 to 49,999”, “50,000 to 74,999”, “75,000 to 99,999”, “100,000 to 124,999” and “125,000 and more”. The proportion of people who rated their mental health condition as “Excellent” within each income group are calculated in the table.</p>
+<p>In our model results, the bar plot shows the distribution of the number of people in different income ranges. The general trend between the number of people and income groups is that the amount of people decreases as income increases. Except for the last group with income 125,000 and more has slightly more people than that with income between 100,000 to 124,999. While a weak negative correlation between the number of people and the proportion of people who rated their mental health condition as “Excellent” within different income ranges appears in the scatterplot.</p>
+<p>Then, a linear regression model is built for these two variables. The fitted line equation is <span class="math display">\[\hat{Y}_i = 0.3954 - 1.972e(-05) X_i\]</span></p>
+<p><span class="math inline">\(X_i\)</span> represents the amount of people within different income ranges. <span class="math inline">\(\hat{Y}_i\)</span> represents the proportion of people who rated their mental health condition as “Excellent” in different income groups. The result shows that negative linear association appear between numbers of people and mental health conditions in variable income groups, where the intercept <span class="math inline">\(\hat{\beta}_0\)</span> is 3.954e-01 and the slope <span class="math inline">\(\hat{\beta}_1\)</span> is -1.972e-05. It indicates that if the amount of people within one income range increase by one unit, the proportion of people who rated their mental health condition as “Excellent” in this group is expected to decrease by the 1.972e-05 unit. What’s more, as p-values for both <span class="math inline">\(\hat{\beta}_0\)</span> and <span class="math inline">\(\hat{\beta}_1\)</span> are smaller than the confidence interval 0.05, which reject <span class="math inline">\(H_0\)</span> in both hypothesis tests. Two parameters are statistically different from zero, which play significant roles in the model. Combine these ideas with previous results, those low-income groups with greater amounts of people are less likely to have an excellent mental health condition.</p>
+<p>Results of the model allow us to infer that people in low-income groups are associated with higher risks for anxiety and mental disorders, which means that people who have lower income are usually under greater pressure than the ones earn more money in nowadays society. Therefore, mental health status is affected by income significantly, which proves the assumption in the introduction that lower-income is related to mental disorders. According to McElreath, this model represents the small world to a great extend. Under the assumption that small world describes the real world accurately, linear regression model performs the effects of income on mental health status under reasonable claims from an optimal perspective. However, it represents the large world to a small extend. Since the optimal assumption of the model in the small world might be affected by other variables. This model cannot fully represent the condition in the large world.</p>
+</div>
+<div id="weaknesses" class="section level2">
+<h2>Weaknesses</h2>
+<ol style="list-style-type: decimal">
+<li><p>As data of the Year 2017 was constrained from the Canadian General Social Survey (GSS), results generated from this dataset could only be used to explain the effects of income on the mental health status of Canadian within this year, not a general trend that could last continuously.</p></li>
+<li><p>The weakness of the survey is that only 52.4% of the population response the survey. To increase the response rate, surveys could be offered through multiple channels.</p></li>
+<li><p>In this dataset, people were putting into different income ranges. The association between income and mental health status could not be observed directly from the plot. To improve this, each person’s actual income could be collected.</p></li>
+<li><p>Lurking variables might appear in the analysis. Some potential lurking variables like physical health conditions or stressful life situations could also affect mental health status other than income. For instance, two people with the same salary but different marital status might rate their metal health conditions differently. As the person who feels loved by his/her family usually has a more positive mood toward life. Therefore, other variables should be considered in the analysis in order to get a more precise result.</p></li>
+<li><p>As only 6 data points of the proportion of people who rated their mental health condition as “Excellent” were used for the analysis, each point heavily influenced the result. To decrease the margin of errors, proportions of people in other mental health groups could also be utilized for the analysis.</p></li>
+</ol>
+</div>
+<div id="next-steps" class="section level2">
+<h2>Next Steps</h2>
+<p>In the next steps of the analysis, some improvements could be made to complement the conclusions of this report.</p>
+<ol style="list-style-type: decimal">
+<li><p>More data could be collected from the survey. Instead of arranging people into several income ranges, people’s actual income could be included in the survey. By analyzing the distribution of the mental health status of people with different actual income, the association could be concluded more clearly from the regression model.</p></li>
+<li><p>Other factors that impact mental health should be considered for a more precise analysis. People could be separated by genders. By comparing the proportions of people with different genders having “Excellent” mental health condition in each income group, the influence of genders toward mental health status could be also concluded in the analysis as a subsequent study.</p></li>
+</ol>
+</div>
+<div id="references" class="section level2">
+<h2>References</h2>
+<ol style="list-style-type: decimal">
+<li><p>R. Alexander, S. Caetano (7, October. 2020). [R script].’gss_cleasing.R’. <a href="https://q.utoronto.ca/courses/184060/files/9422740/download?download_frd=1" class="uri">https://q.utoronto.ca/courses/184060/files/9422740/download?download_frd=1</a></p></li>
+<li><p>CHASS Data Centre. (2015). [Dataset]. <a href="http://dc.chass.utoronto.ca/myaccess.html" class="uri">http://dc.chass.utoronto.ca/myaccess.html</a></p></li>
+<li><p>AlphaBiolabs. 2020. Being Poor Can Damage Your DNA. [online] Available at: <a href="https://www.alphabiolabs.co.uk/2015/06/02/being-poor-can-damage-your-dna/" class="uri">https://www.alphabiolabs.co.uk/2015/06/02/being-poor-can-damage-your-dna/</a> [Accessed 19 October 2020].</p></li>
+<li><p>McElreath, R. (2016). Chapter2 Small Worlds and Large Worlds. In Statistical rethinking a Bayesian course with examples in R and Stan. Boca Raton: CRC Press, Taylor &amp; Francis Group.</p></li>
+</ol>
+</div>
