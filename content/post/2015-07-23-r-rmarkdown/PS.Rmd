@@ -55,6 +55,7 @@ The method used is stratified sampling. Firstly, each of ten provinces were divi
 
 ## Model
 
+
 The selected model is linear regression model, and it's run by R. Linear regression is to model a linear relationship between a responding variable y and the explanatory variable x. In this case, we are predicting there is a linear relationship between income and mental health. 
 
 The formula is: $$Y_i = \beta_0 + \beta_1X(people,i) + \epsilon_i$$
@@ -62,7 +63,7 @@ $Y_i$ is the dependent variable in the true model while $X(people,i)$ is the exp
 
 We constructed a simply linear regression where X represents the number of people in different level of income groups, and Y represents number of people who rate their mental health condition “Excellent” in those income group. The variable mental health condition in raw dataset was categorical variable. However, we accumulated the number of people who rate themselves “Excellent”, so it becomes a numerical variable. Since both X and Y are numerical variables, we can observe whether people within higher income ranges have better health condition by making the linear regression model out of it.
 
-Model Checking and Diagnostic plot:
+- Model Checking and Diagnostic plot:
 ```{r, echo=FALSE}
 
 mod <- lm(proportion ~ income, data = income_metal_health_data)
